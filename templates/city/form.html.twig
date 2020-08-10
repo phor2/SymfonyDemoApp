@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% trans %}City{% endtrans %}
+	{% if edit %}
+		{% trans %}Edit{% endtrans %}
+	{% else %}
+		{% trans %}Add{% endtrans %}
+	{% endif %}
+{% endblock %}
+{% block heading %}{% trans %}City{% endtrans %}
+	{% if edit %}
+		{% trans %}Edit{% endtrans %}
+	{% else %}
+		{% trans %}Add{% endtrans %}
+	{% endif %}
+{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+	<a href="{{ path('city_list') }}" role="button"></a>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button type="submit" class="btn btn-primary">
+		{% if edit %}
+			{% trans %}Save{% endtrans %}
+		{% else %}
+			{% trans %}Add{% endtrans %}
+		{% endif %}
+	</button>
+	{{ form_end(form) }}
+{% endblock %}

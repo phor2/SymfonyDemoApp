@@ -1,0 +1,6 @@
+App\Entity\City:
+    properties:
+        name:
+            - NotNull: { message: 'city.name.not_null' }
+        state:
+            - NotNull: { message: 'city.state.not_null' }

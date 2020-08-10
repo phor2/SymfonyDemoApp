@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}City list{% endtrans %}
+{% endblock %}
+{% block heading %}
+	{% trans %}City list{% endtrans %}
+{% endblock %}
+{% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success alert-dismissible fade show">
+			{{ message|trans }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="alert alert-danger alert-dismissible fade show">
+			{{ message|trans }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	{% endfor %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{% trans %}Name{% endtrans %}</th>
+				<th>{% trans %}State{% endtrans %}</th>
+				<th>{% trans %}Capitol{% endtrans %}</th>
+				<th>
+					<a href="{{ path('city_list', {'sort': 'population', 'order': 'asc' }) }}" role="button">
+						<i class="fas fa-sort-amount-up-alt"></i>
+					</a>
+					<a href="{{ path('city_list', { 'sort': 'population', 'order': 'desc'  }) }}" role="button">
+						<i class="fas fa-sort-amount-down"></i>
+					</a>
+					{% trans %}Population{% endtrans %}</th>
+				<th>
+					<a href="{{ path('city_add') }}" role="button">
+						<i class="fas fa-plus-circle fa-2x"></i>
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for city in city_array %}
+				<tr>
+					<td>
+						<a href="{{ path('city_edit', { 'id': city.id }) }}" role="button">
+							<i class="fas fa-edit"></i>
+							{{ city.name|e }}</a>
+					</td>
+					<td>
+						{{ city.state|e }}
+					</td>
+					<td>
+						{% if city.capitol %}
+							<i class="fas fa-check"></i>
+						{% else %}
+							<i class="fas fa-times"></i>
+						{% endif %}
+					</td>
+					<td>
+						{% if city.population > 0 %}
+							{{city.population|number_format(0, ',', ' ')}}
+						{% else %}
+							<i class="fas fa-question"></i>
+						{% endif %}
+					</td>
+					<td>
+						<a href="{{ path('city_show', { 'id': city.id }) }}" role="button">
+							<i class="fas fa-eye"></i>
+						</a>
+						&nbsp; &nbsp;
+						<a href="{{ path('city_delete', { 'id': city.id }) }}" role="button" onclick="return confirm('{% trans %}really-delete{% endtrans %}')">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

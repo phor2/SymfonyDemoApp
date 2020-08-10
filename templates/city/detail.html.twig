@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% trans %}City{% endtrans %} {{city.name|e}}
+{% endblock %}
+{% block heading %}{% trans %}City{% endtrans %} {{city.name|e}}
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">{% trans %}Name{% endtrans %}</th>
+				<td>{{city.name|e}}</td>
+			</tr>
+			<tr>
+				<th scope="row">{% trans %}State{% endtrans %}</th>
+				<td>{{city.state|e}}</td>
+			</tr>
+			<tr>
+				<th scope="row">{% trans %}Capitol{% endtrans %}</th>
+				<td>
+					{% if city.capitol %}
+						<i class="fas fa-check"></i>
+					{% else %}
+						<i class="fas fa-times"></i>
+					{% endif %}
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">{% trans %}Population{% endtrans %}</th>
+				<td>
+					{% if city.population > 0 %}
+						{{city.population|number_format(0, ',', ' ')}}
+					{% else %}
+						<i class="fas fa-question"></i>
+					{% endif %}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

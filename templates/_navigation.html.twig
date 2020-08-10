@@ -1,0 +1,15 @@
+<ul class="nav">
+	<li class="nav-item">
+		<a class="nav-link active" href="{{ path('city_list') }}" role="button">
+			<i class="fas fa-home"></i>
+			{% trans %}List{% endtrans %}</a>
+	</li>
+	<li>
+		<a class="nav-link active" href="{{ path('city_list', {'_locale': 'cs'}) }}" role="button">
+			{% trans %}cs{% endtrans %}</a>
+	</li>
+	<li>
+		<a class="nav-link active" href="{{ path('city_list', {'_locale': 'en'}) }}" role="button">
+			{% trans %}en{% endtrans %}</a>
+	</li>
+</ul>
